@@ -100,6 +100,14 @@ app.get('/dashboard', isAuthenticated, (req, res) => {
     { symbol: 'CRM', name: 'Salesforce, Inc.', price: '288.30', change: '+1.55%', trend: 'up' },
     { symbol: 'NFLX', name: 'Netflix, Inc.', price: '590.20', change: '+0.80%', trend: 'up' }
   ];
+
+  // Sort stocks by change percentage (smallest to largest)
+  stocks.sort((a, b) => {
+    const valA = parseFloat(a.change.replace('%', ''));
+    const valB = parseFloat(b.change.replace('%', ''));
+    return valA - valB;
+  });
+
   res.render('dashboard', { user: req.session.user, stocks });
 });
 
