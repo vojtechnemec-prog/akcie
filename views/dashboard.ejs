@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ultra Greek Edition</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .dashboard-container { max-width: 800px; padding: 2rem; margin: 4rem auto; position: relative; z-index: 100; }
+        .stock-table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-bg); }
+        .stock-table th, .stock-table td { padding: 12px; border-bottom: 1px solid var(--border-color); }
+        .trend-up { color: #27ae60; font-weight: bold; }
+        .trend-down { color: #e74c3c; font-weight: bold; }
+        .symbol { font-weight: bold; background: rgba(0,123,255,0.1); padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <!-- Galerie 30 fotek vlevo -->
+    <div class="photo-gallery gallery-left">
+        <% for(let i=0; i<30; i++) { %>
+            <img src="https://picsum.photos/seed/<%= i + 'greece' %>/300/200" 
+                 alt="Greek photo" class="side-photo">
+        <% } %>
+    </div>
+
+    <!-- Galerie 30 fotek vpravo -->
+    <div class="photo-gallery gallery-right">
+        <% for(let i=0; i<30; i++) { %>
+            <img src="https://picsum.photos/seed/<%= i + 'kids' %>/300/200" 
+                 alt="Vacation photo" class="side-photo">
+        <% } %>
+    </div>
+
+    <div class="container dashboard-container">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1>Dashboard 🚀🇬🇷</h1>
+            <a href="/logout" class="link" style="margin:0;">Logout</a>
+        </header>
+        
+        <p>Vítej zpět, <strong><%= user.username %></strong>! Tvůj EXTRÉMNÍ přehled trhu s celkem 60 fotkami!</p>
+        
+        <!-- Duhový box s 15px okrajem -->
+        <div class="rainbow-box">
+            <div class="table-wrapper">
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Společnost</th>
+                            <th>Cena ($)</th>
+                            <th>Změna</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (typeof stocks !== 'undefined' && stocks.length) { %>
+                            <% stocks.forEach(stock => { %>
+                            <tr>
+                                <td><span class="symbol"><%= stock.symbol %></span></td>
+                                <td><%= stock.name %></td>
+                                <td><strong><%= stock.price %></strong></td>
+                                <td class="trend-<%= stock.trend %>"><%= stock.change %></td>
+                            </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4">Žádné akcie k zobrazení.</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p style="font-size: 0.8rem; color: #888;">Nyní je tu celkem 60 fotek z Řecka a s dětmi po obou stranách!</p>
+    </div>
+</body>
+</html>
