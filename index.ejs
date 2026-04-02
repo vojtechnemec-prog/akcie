@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vojtech App</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome!</h1>
+        <p>This is a simple fullstack Express app.</p>
+        <% if (user) { %>
+            <p>Hello, <strong><%= user.username %></strong>!</p>
+            <a href="/dashboard" class="button">Go to Dashboard</a>
+        <% } else { %>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <a href="/login" class="link">Login</a>
+                <a href="/register" class="link">Register</a>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
